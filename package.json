@@ -1,0 +1,58 @@
+{
+  "name": "assetgraph-workbox",
+  "version": "1.0.0",
+  "description": "Add a precaching service worker to an assetgraph with workbox",
+  "main": "lib/assetgraph-workbox.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "common-path-prefix": "^2.0.0",
+    "lodash": "^4.17.15",
+    "p-map": "^3.0.0",
+    "read-pkg-up": "^7.0.0",
+    "urltools": "^0.4.1",
+    "workbox-build": "^4.3.1"
+  },
+  "devDependencies": {
+    "assetgraph": "^5.10.0",
+    "eslint": "^6.0.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-mocha": "^5.3.0",
+    "eslint-plugin-node": "^9.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^6.0.0",
+    "nyc": "^14.0.0",
+    "prettier": "^1.14.3",
+    "sinon": "^7.5.0",
+    "unexpected": "^11.0.0",
+    "unexpected-assetgraph": "^1.1.0",
+    "unexpected-sinon": "^10.11.2"
+  },
+  "scripts": {
+    "lint": "eslint . && prettier --check '**/*.js'",
+    "test": "mocha",
+    "ci": "npm test && npm run lint && npm run coverage",
+    "coverage": "NODE_ENV=development nyc --reporter=lcov --reporter=text --all -- npm test && echo google-chrome coverage/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/assetgraph/assetgraph-workbox.git"
+  },
+  "keywords": [
+    "assetgraph",
+    "workbox",
+    "precache",
+    "service worker"
+  ],
+  "author": "Andreas Lind <andreaslindpetersen@gmail.com>",
+  "license": "BSD-3-Clause",
+  "nyc": {
+    "include": [
+      "lib/**"
+    ]
+  }
+}
