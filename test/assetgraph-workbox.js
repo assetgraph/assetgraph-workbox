@@ -115,7 +115,7 @@ describe('assetgraph-workbox', function() {
       query: {
         isInitial: true
       },
-      configPath: pathModule.resolve(root, 'sw-precache-config.js')
+      configPath: pathModule.resolve(root, 'workbox-config.js')
     });
 
     expect(warnSpy, 'to have calls satisfying', () => {
@@ -422,7 +422,7 @@ describe('assetgraph-workbox', function() {
       query: {
         isInitial: true
       },
-      configPath: pathModule.resolve(root, 'custom-sw-precache-config.js')
+      configPath: pathModule.resolve(root, 'custom-workbox-config.js')
     });
 
     expect(
@@ -453,7 +453,7 @@ describe('assetgraph-workbox', function() {
       query: {
         isInitial: true
       },
-      configPath: 'not-found-sw-precache-config.js'
+      configPath: 'not-found-workbox-config.js'
     });
 
     expect(
@@ -463,7 +463,7 @@ describe('assetgraph-workbox', function() {
       1
     );
     expect(warnSpy, 'to have calls satisfying', () =>
-      warnSpy(/not-found-sw-precache-config\.js/)
+      warnSpy(/not-found-workbox-config\.js/)
     );
   });
 
