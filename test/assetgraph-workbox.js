@@ -167,16 +167,15 @@ describe('assetgraph-workbox', function() {
     await assetGraph
       .on('warn', warnSpy)
       .loadAssets('index.html')
-      .populate({ followRelations: { to: { protocol: 'file:' } } })
-      .queue(assetGraph => {
-        assetGraph.addAsset(
-          new AssetGraph().addAsset({
-            type: 'JavaScript',
-            url: `${assetGraph.root}index-precache-service-worker.js`,
-            text: 'alert("hello");'
-          })
-        );
-      });
+      .populate({ followRelations: { to: { protocol: 'file:' } } });
+
+    assetGraph.addAsset(
+      new AssetGraph().addAsset({
+        type: 'JavaScript',
+        url: `${assetGraph.root}index-precache-service-worker.js`,
+        text: 'alert("hello");'
+      })
+    );
 
     expect(warnSpy, 'to have calls satisfying', () =>
       warnSpy(/^ENOENT.*notFound\.js/)
