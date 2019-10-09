@@ -42,7 +42,7 @@ describe('assetgraph-workbox', function() {
       fileName: 'notFound.js'
     });
 
-    await assetgraphWorkbox(assetGraph, { isInitial: true });
+    await assetgraphWorkbox(assetGraph, { query: { isInitial: true } });
 
     expect(assetGraph, 'to contain relations', 'HtmlScript', 4);
     expect(assetGraph, 'to contain relations', 'JavaScriptStaticUrl', 4);
@@ -80,11 +80,10 @@ describe('assetgraph-workbox', function() {
       await assetGraph.populate({
         followRelations: { to: { protocol: 'file:' } }
       });
-      await assetgraphWorkbox(
-        assetGraph,
-        { isInitial: true },
-        { minify: true }
-      );
+      await assetgraphWorkbox(assetGraph, {
+        query: { isInitial: true },
+        minify: true
+      });
 
       expect(
         assetGraph,
@@ -112,15 +111,12 @@ describe('assetgraph-workbox', function() {
       followRelations: { to: { protocol: 'file:' } }
     });
 
-    await assetgraphWorkbox(
-      assetGraph,
-      {
+    await assetgraphWorkbox(assetGraph, {
+      query: {
         isInitial: true
       },
-      {
-        configPath: pathModule.resolve(root, 'sw-precache-config.js')
-      }
-    );
+      configPath: pathModule.resolve(root, 'sw-precache-config.js')
+    });
 
     expect(warnSpy, 'to have calls satisfying', () => {
       warnSpy(
@@ -142,7 +138,7 @@ describe('assetgraph-workbox', function() {
     expect(assetGraph, 'to contain relations', 'HtmlIFrame');
     expect(assetGraph, 'to contain relations', 'HtmlImage', 2);
 
-    await assetgraphWorkbox(assetGraph, { isInitial: true });
+    await assetgraphWorkbox(assetGraph, { query: { isInitial: true } });
 
     expect(
       assetGraph,
@@ -182,7 +178,7 @@ describe('assetgraph-workbox', function() {
     );
 
     await expect(
-      assetgraphWorkbox(assetGraph, { isInitial: true }),
+      assetgraphWorkbox(assetGraph, { query: { isInitial: true } }),
       'to be rejected with',
       new Error(
         `There is already a service worker at ${assetGraph.root}index-precache-service-worker.js -- giving up`
@@ -204,11 +200,10 @@ describe('assetgraph-workbox', function() {
       expect(assetGraph, 'to contain relations', 'HtmlIFrame');
       expect(assetGraph, 'to contain relations', 'HtmlImage', 2);
 
-      await assetgraphWorkbox(
-        assetGraph,
-        { isInitial: true },
-        { single: true }
-      );
+      await assetgraphWorkbox(assetGraph, {
+        query: { isInitial: true },
+        single: true
+      });
 
       expect(
         assetGraph,
@@ -241,11 +236,10 @@ describe('assetgraph-workbox', function() {
         fileName: 'otherpage.html'
       })[0].url = `${assetGraph.root}somewhereelse/index.html`;
 
-      await assetgraphWorkbox(
-        assetGraph,
-        { isInitial: true },
-        { single: true }
-      );
+      await assetgraphWorkbox(assetGraph, {
+        query: { isInitial: true },
+        single: true
+      });
 
       expect(assetGraph, 'to contain asset', {
         url: `${assetGraph.root}index-precache-service-worker.js`
@@ -267,11 +261,10 @@ describe('assetgraph-workbox', function() {
       expect(assetGraph, 'to contain assets', 'Html', 2);
       expect(assetGraph, 'to contain relations', 'HtmlImage', 2);
 
-      await assetgraphWorkbox(
-        assetGraph,
-        { isInitial: true },
-        { single: true }
-      );
+      await assetgraphWorkbox(assetGraph, {
+        query: { isInitial: true },
+        single: true
+      });
 
       expect(
         assetGraph,
@@ -307,11 +300,10 @@ describe('assetgraph-workbox', function() {
       assetGraph.findAssets({ fileName: 'index.html' })[0].url =
         'https://example.com/blah.html';
 
-      await assetgraphWorkbox(
-        assetGraph,
-        { isInitial: true },
-        { single: true }
-      );
+      await assetgraphWorkbox(assetGraph, {
+        query: { isInitial: true },
+        single: true
+      });
 
       expect(assetGraph, 'to contain asset', {
         url: 'https://example.com/blah-precache-service-worker.js'
@@ -344,11 +336,10 @@ describe('assetgraph-workbox', function() {
       assetGraph.findAssets({ fileName: 'otherpage.html' })[0].url =
         'https://yadda.com/foo.html';
 
-      await assetgraphWorkbox(
-        assetGraph,
-        { isInitial: true },
-        { single: true }
-      );
+      await assetgraphWorkbox(assetGraph, {
+        query: { isInitial: true },
+        single: true
+      });
 
       expect(assetGraph, 'to contain asset', {
         url: 'https://example.com/blah-precache-service-worker.js'
@@ -375,11 +366,10 @@ describe('assetgraph-workbox', function() {
 
       await assetGraph.populate();
 
-      await assetgraphWorkbox(
-        assetGraph,
-        { isInitial: true },
-        { single: true }
-      );
+      await assetgraphWorkbox(assetGraph, {
+        query: { isInitial: true },
+        single: true
+      });
 
       expect(
         htmlAssets[0].text,
@@ -406,7 +396,7 @@ describe('assetgraph-workbox', function() {
       followRelations: { to: { protocol: 'file:' } }
     });
 
-    await assetgraphWorkbox(assetGraph, { isInitial: true });
+    await assetgraphWorkbox(assetGraph, { query: { isInitial: true } });
 
     expect(
       assetGraph,
@@ -428,15 +418,12 @@ describe('assetgraph-workbox', function() {
       followRelations: { to: { protocol: 'file:' } }
     });
 
-    await assetgraphWorkbox(
-      assetGraph,
-      {
+    await assetgraphWorkbox(assetGraph, {
+      query: {
         isInitial: true
       },
-      {
-        configPath: pathModule.resolve(root, 'custom-sw-precache-config.js')
-      }
-    );
+      configPath: pathModule.resolve(root, 'custom-sw-precache-config.js')
+    });
 
     expect(
       assetGraph,
@@ -462,15 +449,12 @@ describe('assetgraph-workbox', function() {
         followRelations: { to: { protocol: 'file:' } }
       });
 
-    await assetgraphWorkbox(
-      assetGraph,
-      {
+    await assetgraphWorkbox(assetGraph, {
+      query: {
         isInitial: true
       },
-      {
-        configPath: 'not-found-sw-precache-config.js'
-      }
-    );
+      configPath: 'not-found-sw-precache-config.js'
+    });
 
     expect(
       assetGraph,
@@ -500,7 +484,7 @@ describe('assetgraph-workbox', function() {
 
     await expect(
       assetgraphWorkbox(assetGraph, {
-        isInitial: true
+        query: { isInitial: true }
       }),
       'to be rejected with',
       'The globPatterns config option is not supported at present, sorry!'
