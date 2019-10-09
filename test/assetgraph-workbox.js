@@ -97,7 +97,7 @@ describe('assetgraph-workbox', function() {
     });
   });
 
-  it('should relay warning messages from sw-precache', async function() {
+  it('should relay warning messages from workbox', async function() {
     const warnSpy = sinon.spy().named('warn');
     const root = pathModule.resolve(
       __dirname,
