@@ -26,7 +26,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "mocha": "^6.0.0",
     "nyc": "^14.0.0",
-    "prettier": "^1.14.3",
+    "prettier": "~1.19.1",
     "sinon": "^7.5.0",
     "unexpected": "^11.0.0",
     "unexpected-assetgraph": "^1.1.0",
