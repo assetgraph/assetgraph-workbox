@@ -1,1 +1,1 @@
-alert("Modern browsers!");
+alert('Modern browsers!');

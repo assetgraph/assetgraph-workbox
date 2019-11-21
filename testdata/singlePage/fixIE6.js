@@ -1,1 +1,1 @@
-alert("Fix IE6!");
+alert('Fix IE6!');
